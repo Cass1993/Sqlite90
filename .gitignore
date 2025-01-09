@@ -1,2 +1,5 @@
-id_rsa 
-id_rsa.pub 
+*.pyc
+__pycache__/
+.DS_Store
+id_rsa
+id_rsa.pub
