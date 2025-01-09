@@ -6,9 +6,11 @@ from urllib.parse import urlparse
 app = Flask(__name__)
 
 def get_db_connection():
+    # Parse the DATABASE_URL environment variable
     result = urlparse(os.getenv('DATABASE_URL'))
+    # Establish a connection to the PostgreSQL database
     conn = psycopg2.connect(
-        dbname=result.path[1:],
+        dbname=result.path[1:],  # Remove the leading '/' from the path
         user=result.username,
         password=result.password,
         host=result.hostname,
@@ -18,6 +20,12 @@ def get_db_connection():
 
 @app.route('/')
 def home():
+    # Example of using the database connection
+    conn = get_db_connection()
+    # You can execute queries here using the connection
+    # For example: cur = conn.cursor()
+    # Don't forget to close the connection after use
+    conn.close()
     return render_template('index.html')
 
 if __name__ == '__main__':
