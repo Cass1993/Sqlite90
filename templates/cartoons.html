@@ -16,7 +16,10 @@
             {% for cartoon in cartoons %}
             <div class="cartoon">
                 <h3>{{ cartoon.name }}</h3>
-                <a href="{{ cartoon.link }}">Watch Episode</a>
+                <video width="640" height="480" controls>
+                    <source src="{{ cartoon.video }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             {% endfor %}
         </section>

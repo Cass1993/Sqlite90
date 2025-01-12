@@ -50,11 +50,24 @@ def cartoons():
     cur.execute("SELECT * FROM cartoons")
     cartoons = cur.fetchall()
 
+    # Retrieve the video URLs or embed codes for each cartoon
+    for i, cartoon in enumerate(cartoons):
+        # Assuming the video URL or embed code is stored in a separate column in the database
+        # Replace 'video_url' with the actual column name
+        video_url = retrieve_video_url(cartoon[0])
+        cartoons[i] = (cartoon[0], cartoon[1], cartoon[2], video_url)
+
     # Close the database connection
     conn.close()
 
     # Pass the list of cartoons to the template
-    return render_template('cartoon.html', cartoons=cartoons)
+    return render_template('cartoons.html', cartoons=cartoons)
+
+def retrieve_video_url(cartoon_id):
+    # Retrieve the video URL or embed code from the database or a third-party service
+    # For example:
+    video_url = "https://example.com/videos/{}.mp4".format(cartoon_id)
+    return video_url
 
 if __name__ == '__main__':
     # Ensure the app binds to 0.0.0.0 and the correct port
