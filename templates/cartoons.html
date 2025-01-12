@@ -13,20 +13,12 @@
     <main>
         <section id="cartoon-list">
             <h2>Full Episodes</h2>
-            <!-- Example of a cartoon entry -->
+            {% for cartoon in cartoons %}
             <div class="cartoon">
-                <h3>South Park</h3>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Watch Episode</a>
+                <h3>{{ cartoon.name }}</h3>
+                <a href="{{ cartoon.link }}">Watch Episode</a>
             </div>
-            <div class="cartoon">
-                <h3>The Simpsons</h3>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Watch Episode</a>
-            </div>
-            <div class="cartoon">
-                <h3>Family Guy</h3>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Watch Episode</a>
-            </div>
-            <!-- Repeat for each cartoon -->
+            {% endfor %}
         </section>
     </main>
     <footer>

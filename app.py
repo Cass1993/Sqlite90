@@ -40,7 +40,21 @@ def home():
 
 @app.route('/cartoons')
 def cartoons():
-    return render_template('cartoon.html')
+    # Establish a database connection
+    conn = get_db_connection()
+    if conn is None:
+        return "Error connecting to database", 500
+
+    # Execute a query to retrieve a list of cartoons
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM cartoons")
+    cartoons = cur.fetchall()
+
+    # Close the database connection
+    conn.close()
+
+    # Pass the list of cartoons to the template
+    return render_template('cartoon.html', cartoons=cartoons)
 
 if __name__ == '__main__':
     # Ensure the app binds to 0.0.0.0 and the correct port
