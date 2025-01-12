@@ -1,9 +1,15 @@
 import urllib.parse
+
+password = "database47#"
+encoded_password = urllib.parse.quote(password)
+
+DATABASE_URL = f"postgres://postgres:{encoded_password}@localhost:5432/yourdbname"
+
+from flask import Flask, render_template
 import psycopg2
 import os
 from urllib.parse import urlparse
 from dotenv import load_dotenv
-from flask import Flask, render_template
 
 # Load environment variables from .env file
 load_dotenv()
@@ -37,10 +43,6 @@ def home():
     if conn is not None:
         conn.close()
     return render_template('index.html')
-
-@app.route('/cartoons')
-def cartoons():
-    return render_template('cartoon.html')
 
 if __name__ == '__main__':
     # Ensure the app binds to 0.0.0.0 and the correct port
